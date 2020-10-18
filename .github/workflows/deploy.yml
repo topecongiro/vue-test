@@ -17,12 +17,12 @@ jobs:
         with:
           version: 'latest'
       
+      - name: Build WebAssembly
+        run: wasm-pack build
+        working-directory: ./src/hello
+
       - name: Install
         run: npm install
-
-      - name: Build WebAssembly
-        run: ./build.sh
-        working-directory: ./src/hello
 
       - name: Build UI
         run: npm run build
