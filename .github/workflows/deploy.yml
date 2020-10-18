@@ -21,7 +21,7 @@ jobs:
         run: npm install
 
       - name: Build WebAssembly
-        run: wasm-pack build
+        run: ./build.sh
         working-directory: ./src/hello
 
       - name: Build UI
