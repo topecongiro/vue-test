@@ -5,6 +5,7 @@
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import { Watch } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
 
 @Options({
@@ -12,7 +13,20 @@ import HelloWorld from './components/HelloWorld.vue';
     HelloWorld,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  created() {
+    import('hello').then(lib => {
+      this.hello = lib.hello
+    })
+  }
+
+  hello: () => string = () => ""
+
+  @Watch('hello')
+  onHelloChanged(newMethod: () => string) {
+    console.log(newMethod())
+  }
+}
 </script>
 
 <style>
