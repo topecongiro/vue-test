@@ -13,11 +13,18 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
-
+      - uses: jetli/wasm-pack-action@v0.3.0
+        with:
+          version: 'latest'
+      
       - name: Install
         run: npm install
 
-      - name: Build
+      - name: Build WebAssembly
+        run: wasm-pack build
+        working-directory: ./src/hello
+
+      - name: Build UI
         run: npm run build
 
       - name: Deploy
